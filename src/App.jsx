@@ -13,8 +13,13 @@ function App() {
     setBookmarks(newBookmarks);
   }
 
-  const handleMarkAsRead = time =>{
-    console.log('Mark read', time);
+  const handleMarkAsRead = (id,time) =>{
+    const newReadingTime = readingTime + time;
+    setReadingTime(newReadingTime);
+    // remove the read blog from bookmark
+    // console.log('remove bookmark')
+    const remainingBookmarks = bookmarks.filter(bookmark=> bookmark.id != id);
+    setBookmarks(remainingBookmarks);
   }
 
 
@@ -23,7 +28,8 @@ function App() {
       <Header></Header>
       <div className='md:flex max-w-5xl mx-auto'>
         <Blogs handleAddToBookmark={handleAddToBookmark} handleMarkAsRead={handleMarkAsRead}></Blogs>
-        <Bookmarks bookmarks={bookmarks}></Bookmarks>
+        <Bookmarks bookmarks={bookmarks}
+        readingTime={readingTime}></Bookmarks>
       </div>
     </>
   )
